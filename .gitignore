@@ -112,3 +112,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/data.zip
+/FCN-seg/data/resnet101v2_weights_tf_dim_ordering_tf_kernels_notop.h5
+/FCN-seg/data/fcn_voc_pretrained_model.h5
+/unet-portrait/logs/
+/deeplabv3+-cityscapes/data/pretrained_model_git.h5
+/deeplabv3+-cityscapes/data/weights_08-20_23-06-val088.h5
+/FCN-seg/data/fcn_081acc_50epoch.h5

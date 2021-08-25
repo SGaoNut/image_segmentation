@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="student05@123.56.87.131:22 password" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="student05@123.56.87.131:22 password">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/student05/notebooks/cv_project_2days/image_segmentation" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="tele">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/student05/notebooks/cv_project_2days/image_segmentation" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
