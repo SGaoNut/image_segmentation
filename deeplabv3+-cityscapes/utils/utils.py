@@ -1,9 +1,8 @@
-import pickle
-import cv2
-import numpy as np
 import os
-import tensorflow as tf
+import pickle
 from glob import glob
+
+import tensorflow as tf
 
 
 def read_pkl(path_pkl):
@@ -16,7 +15,7 @@ def create_logdir(BASE_DIR):
     from datetime import datetime
     now_time = datetime.now()
     time_str = datetime.strftime(now_time, '%m-%d_%H-%M')
-    log_dir = os.path.join(BASE_DIR,  "logs", time_str)  # 根据config中的创建时间作为文件夹名
+    log_dir = os.path.join(BASE_DIR, "logs", time_str)  # 根据config中的创建时间作为文件夹名
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
         print("make dir：", log_dir)
@@ -40,7 +39,7 @@ def get_image(image_path, img_height=800, img_width=1600, mask=False, flip=0):
     else:
         img = tf.image.decode_png(img, channels=1)
         img = tf.cast(tf.image.resize(images=img, size=[
-                      img_height, img_width]), dtype=tf.uint8)
+            img_height, img_width]), dtype=tf.uint8)
         img = tf.case([
             (tf.greater(flip, 0), lambda: tf.image.flip_left_right(img))
         ], default=lambda: img)

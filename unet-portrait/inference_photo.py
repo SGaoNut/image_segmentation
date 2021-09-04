@@ -3,13 +3,14 @@
 # @file name  : pre.py
 # @brief      : 推理代码，演示证件照制作过程
 """
-import time
 import os
 import sys
+
 import cv2
 import numpy as np
 import tensorflow as tf
 from PIL import Image
+
 from utils.unet_predictor import UnetPredictor
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     _defaults = {
         "model_path": 'logs/model_weight_2021_08_19_11_05_59-float-label.h5',
         "model_image_size": (224, 224, 3),
-        "num_classes": 2,  # 21
+        "NUM_CLASSES": 2,  # 21
     }
     background_color = "b"  # b:蓝色， r：红色， w：白色
     # path_img = os.path.join(BASE_DIR, "data", "00079.png")
@@ -44,4 +45,3 @@ if __name__ == "__main__":
 
     cv2.imshow("result", show_img)
     cv2.waitKey()
-

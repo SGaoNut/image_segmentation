@@ -32,18 +32,24 @@ if __name__ == "__main__":
 
     train_dataset = tf.data.Dataset.from_tensor_slices((image_list, mask_list))
     train_dataset = train_dataset.shuffle(buffer_size=128).apply(
-        tf.data.experimental.map_and_batch(map_func=load_data,  # 实现数据预处理功能
-                                           batch_size=batch_size,
-                                           num_parallel_calls=tf.data.experimental.AUTOTUNE,
-                                           drop_remainder=True))
+        tf.data.experimental.map_and_batch(
+            map_func=load_data,  # 实现数据预处理功能
+            batch_size=batch_size,
+            num_parallel_calls=tf.data.experimental.AUTOTUNE,
+            drop_remainder=True
+        )
+    )
     train_dataset = train_dataset.repeat().prefetch(tf.data.experimental.AUTOTUNE)  # 将整个数据重复多次，用于处理Epoch
 
     val_dataset = tf.data.Dataset.from_tensor_slices((val_image_list, val_mask_list))
     val_dataset = val_dataset.apply(
-        tf.data.experimental.map_and_batch(map_func=load_data,
-                                           batch_size=batch_size,
-                                           num_parallel_calls=tf.data.experimental.AUTOTUNE,
-                                           drop_remainder=True))
+        tf.data.experimental.map_and_batch(
+            map_func=load_data,
+            batch_size=batch_size,
+            num_parallel_calls=tf.data.experimental.AUTOTUNE,
+            drop_remainder=True
+        )
+    )
     val_dataset = val_dataset.repeat().prefetch(tf.data.experimental.AUTOTUNE)
 
     # step2：损失函数、优化器、学习率调整策略设置
@@ -51,7 +57,8 @@ if __name__ == "__main__":
     loss = tf.losses.SparseCategoricalCrossentropy(from_logits=True)
     epoch_size = len(image_list) // batch_size
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
-        initial_learning_rate=lr_init, decay_steps=epoch_size, decay_rate=decay_rate, staircase=True)
+        initial_learning_rate=lr_init, decay_steps=epoch_size, decay_rate=decay_rate, staircase=True
+    )
     optimizer = tf.optimizers.Adam(learning_rate=lr_schedule)
 
     # step3：模型搭建、编译
@@ -71,9 +78,11 @@ if __name__ == "__main__":
                          save_weights_only='True', verbose=1)
     callbacks = [mc, tb]
 
-    model.fit(train_dataset,
-              steps_per_epoch=len(image_list) // batch_size,
-              epochs=MAX_EPOCH,
-              validation_data=val_dataset,
-              validation_steps=len(val_image_list) // batch_size,
-              callbacks=callbacks)
+    model.fit(
+        train_dataset,
+        steps_per_epoch=len(image_list) // batch_size,
+        epochs=MAX_EPOCH,
+        validation_data=val_dataset,
+        validation_steps=len(val_image_list) // batch_size,
+        callbacks=callbacks
+    )

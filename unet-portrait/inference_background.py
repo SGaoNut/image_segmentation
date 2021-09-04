@@ -3,13 +3,14 @@
 # @file name  : pre.py
 # @brief      : 推理代码，演示视频背景替换
 """
-import time
 import os
 import sys
+
 import cv2
 import numpy as np
 import tensorflow as tf
 from PIL import Image
+
 from utils.unet_predictor import UnetPredictor
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     _defaults = {
         "model_path": 'logs/model_weight_2021_08_20_13_50_54-336-0.95.h5',
         "model_image_size": (336, 336, 3),
-        "num_classes": 2,  # 21
+        "NUM_CLASSES": 2,  # 21
     }
     path_back = os.path.join(BASE_DIR, "data", "bg1.jpg")
 
@@ -49,6 +50,5 @@ if __name__ == "__main__":
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
-    vid.release()               # release()释放摄像头
-    cv2.destroyAllWindows()     # 关闭所有图像窗口
-
+    vid.release()  # release()释放摄像头
+    cv2.destroyAllWindows()  # 关闭所有图像窗口

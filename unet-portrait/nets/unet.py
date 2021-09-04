@@ -51,7 +51,7 @@ def Unet(input_shape=(256,256,3), num_classes=21):
     P1 = Conv2D(channels[0], 3, activation='relu', padding='same', kernel_initializer = RandomNormal(stddev=0.02))(P1)
     P1 = Conv2D(channels[0], 3, activation='relu', padding='same', kernel_initializer = RandomNormal(stddev=0.02))(P1)
 
-    # 512, 512, 64 -> 512, 512, num_classes
+    # 512, 512, 64 -> 512, 512, NUM_CLASSES
     P1 = Conv2D(num_classes, 1, activation="softmax")(P1)
 
     model = Model(inputs=inputs, outputs=P1)
